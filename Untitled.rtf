@@ -1,0 +1,644 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+{\fonttbl\f0\fnil\fcharset0 Monaco;}
+{\colortbl;\red255\green255\blue255;\red127\green0\blue85;\red63\green95\blue191;\red127\green159\blue191;
+\red0\green0\blue192;\red63\green127\blue95;\red106\green62\blue62;\red42\green0\blue255;}
+{\*\expandedcolortbl;;\csgenericrgb\c49804\c0\c33333;\csgenericrgb\c24706\c37255\c74902;\csgenericrgb\c49804\c62353\c74902;
+\csgenericrgb\c0\c0\c75294;\csgenericrgb\c24706\c49804\c37255;\csgenericrgb\c41569\c24314\c24314;\csgenericrgb\c16471\c0\c100000;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww28600\viewh14980\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs22 \cf2 package\cf0  mininet;\
+\
+\
+\cf2 import\cf0  java.util.ArrayList;\
+\cf2 import\cf0  java.util.Scanner;\
+\pard\pardeftab720\partightenfactor0
+\cf3 /**\cf0 \
+\cf3  *\cf0 \
+\cf3  * \cf4 @author\cf3  \ul Hamad\ulnone  \ul stududent\ulnone  No: s3619196\cf0 \
+\cf3  */\cf0 \
+\pard\pardeftab720\partightenfactor0
+\cf2 public\cf0  \cf2 class\cf0  Driver \{\
+\
+\
+	Data \cf5 d\cf0  ;\
+	\cf2 int\cf0  \cf5 choice\cf0  ;\
+	\cf2 public\cf0  Driver()\
+	\{\
+		\cf5 d\cf0 =\cf2 new\cf0  Data();\
+\
+		\cf6 //array to hold the profiles for adults    \cf0 \
+		ArrayList<Adult> \cf7 adultProfileList\cf0  = \cf5 \ul \ulc5 d\cf0 \ulc0 .fillAdultProfileList()\ulnone ;\
+\
+		\cf6 //array to hold the profiles for child\cf0 \
+		ArrayList<Child> \cf7 childProfileList\cf0  = \cf5 \ul \ulc5 d\cf0 \ulc0 .fillChildProfileList()\ulnone ;\
+\
+		String \cf7 menuOptions\cf0  [] = \{\
+				\cf8 "Add a person  "\cf0 \
+				,\cf8 "List everyone "\cf0 \
+				,\cf8 "Select a person   "\cf0 \
+				,\cf8 "Exit"\cf0 \
+\
+\
+		\} ;\
+		Menu \cf7 mainMenu\cf0  = \cf2 new\cf0  Menu (\cf8 "Mininet"\cf0  , \cf7 menuOptions\cf0 );\
+\
+		\cf2 int\cf0  \cf7 choice\cf0  ;\
+\
+		Scanner \cf7 \ul \ulc7 input\cf0 \ulnone  = \cf2 new\cf0  Scanner(System.\cf5 in\cf0 );\
+		\cf2 do\cf0  \{\
+\
+			\cf6 //Displaying main menu\cf0 \
+			\cf7 mainMenu\cf0 .display();\
+\
+			\cf7 choice\cf0  = \cf7 mainMenu\cf0 .getValidChoice();\
+\
+			\cf6 //1. Add a person\cf0 \
+			\cf2 if\cf0  (\cf7 choice\cf0  == 1) \{\
+				\cf2 int\cf0  \cf7 addChoice\cf0  ;\
+\
+				\cf6 //\ul Submenu\ulnone  for adding a person\cf0 \
+\
+				String \cf7 submenuOptions\cf0  [] = \{\
+						\cf8 "Add an adult person  "\cf0 \
+						,\cf8 "Add a child person"\cf0 \
+						,\cf8 "Go back   "\cf0 \
+				\} ;\
+				Menu \cf7 subMenu\cf0  = \cf2 new\cf0  Menu (\cf8 "Add Person"\cf0  , \cf7 submenuOptions\cf0 );\
+				\cf7 subMenu\cf0 .display();\
+				\cf7 addChoice\cf0  = \cf7 subMenu\cf0 .getValidChoice();\
+\
+\
+				\cf6 //Add an adult person\cf0 \
+				\cf2 if\cf0  (\cf7 addChoice\cf0  == 1) \{\
+					System.\cf5 out\cf0 .println(\cf8 "Enter name of the person"\cf0 );\
+\
+					String \cf7 name\cf0  = \cf7 input\cf0 .nextLine();\
+					\cf2 int\cf0  \cf7 personAge\cf0  = 0;\
+					\cf2 while\cf0  (\cf7 personAge\cf0  == 0) \{\
+						System.\cf5 out\cf0 .println(\cf8 "Enter age of the person"\cf0 );\
+						\cf7 personAge\cf0  = \cf7 input\cf0 .nextInt();\
+						\cf2 if\cf0  (\cf7 personAge\cf0  <= 0) \{\
+							System.\cf5 out\cf0 .println(\cf8 "Age cannot be less than or equals to 0."\cf0 );\
+							\cf7 personAge\cf0  = 0;\
+						\} \cf2 else\cf0  \cf2 if\cf0  (\cf7 personAge\cf0  < 16 || \cf7 personAge\cf0  > 100) \{\
+							System.\cf5 out\cf0 .println(\cf8 "Age cannot be less than 16 or more than 100."\cf0 );\
+							\cf7 personAge\cf0  = 0;\
+						\}\
+					\}\
+\
+					String \cf7 personGender\cf0  = \cf8 "M"\cf0 ;\
+					String \cf7 g\cf0  = \cf8 ""\cf0 ;\
+					\cf2 while\cf0  (\cf7 personGender\cf0 .equals(\cf8 "M"\cf0 ) || \cf7 personGender\cf0 .equals(\cf8 "F"\cf0 )) \{\
+						System.\cf5 out\cf0 .println(\cf8 "Enter gender of the person (M or F only)"\cf0 );\
+						\cf7 personGender\cf0  = \cf7 input\cf0 .next();\
+						\cf2 if\cf0  (!(\cf7 personGender\cf0 .toLowerCase().equals(\cf8 "m"\cf0 )\
+								|| \cf7 personGender\cf0 .toLowerCase().equals(\cf8 "f"\cf0 ))) \cf6 //toLowerCase() is used, so both upper case and lower case inputs treated as same\cf0 \
+						\{\
+							System.\cf5 out\cf0 .println(\cf8 "Invalid selection. Please enter a valid choice."\cf0 );\
+							\cf7 personGender\cf0  = \cf8 "M"\cf0 ;\
+						\} \cf2 else\cf0  \{\
+							\cf7 g\cf0  = \cf7 personGender\cf0 .toUpperCase(); \cf6 //If the input is m or f, We will again convert it to upper case for storing\cf0 \
+							\cf7 personGender\cf0  = \cf8 "A"\cf0 ;\
+						\}\
+					\}\
+					\cf6 //Adding person to the network\cf0 \
+					Adult \cf7 adult\cf0  = \cf2 new\cf0  Adult();\
+					\cf7 adult\cf0 .setName(\cf7 name\cf0 );\
+					\cf7 adult\cf0 .setGender(\cf7 g\cf0 );\
+					\cf7 adult\cf0 .setAge(\cf7 personAge\cf0 );\
+					\cf7 adultProfileList\cf0 .add(\cf7 adult\cf0 );\
+					System.\cf5 out\cf0 .println(\cf8 "Adult person has been added."\cf0 );\
+				\}\
+\
+				\cf6 //Add a child\cf0 \
+				\cf2 else\cf0  \cf2 if\cf0  (\cf7 addChoice\cf0  == 2) \{\
+					System.\cf5 out\cf0 .println(\cf8 "Enter name of the child"\cf0 );\
+					\cf7 input\cf0 .nextLine();\
+					String \cf7 name\cf0  = \cf7 input\cf0 .nextLine();\
+					\cf2 int\cf0  \cf7 childAge\cf0  = 0;\
+					\cf2 while\cf0  (\cf7 childAge\cf0  == 0) \{\
+						System.\cf5 out\cf0 .println(\cf8 "Enter age of the child"\cf0 );\
+						\cf7 childAge\cf0  = \cf7 input\cf0 .nextInt();\
+						\cf2 if\cf0  (\cf7 childAge\cf0  <= 0) \{\
+							System.\cf5 out\cf0 .println(\cf8 "Age cannot be less than or equals to 0."\cf0 );\
+							\cf7 childAge\cf0  = 0;\
+						\} \cf2 else\cf0  \cf2 if\cf0  (\cf7 childAge\cf0  > 16) \{\
+							System.\cf5 out\cf0 .println(\cf8 "Age cannot be greater than 16."\cf0 );\
+							\cf7 childAge\cf0  = 0;\
+						\}\
+					\}\
+					String \cf7 childGender\cf0  = \cf8 "M"\cf0 ;\
+					String \cf7 g\cf0  = \cf8 ""\cf0 ;\
+					\cf2 while\cf0  (\cf7 childGender\cf0 .equals(\cf8 "M"\cf0 ) || \cf7 childGender\cf0 .equals(\cf8 "F"\cf0 )) \{\
+						System.\cf5 out\cf0 .println(\cf8 "Enter gender of the child (M or F only)"\cf0 );\
+						\cf7 childGender\cf0  = \cf7 input\cf0 .next();\
+						\cf2 if\cf0  (!(\cf7 childGender\cf0 .toLowerCase().equals(\cf8 "m"\cf0 )\
+								|| \cf7 childGender\cf0 .toLowerCase().equals(\cf8 "f"\cf0 ))) \cf6 //toLowerCase() is used, so both upper case and lower case inputs treated as same\cf0 \
+						\{\
+							System.\cf5 out\cf0 .println(\cf8 "Invalid selection. Please enter a valid choice."\cf0 );\
+							\cf7 childGender\cf0  = \cf8 "M"\cf0 ;\
+						\} \cf2 else\cf0  \{\
+							\cf7 g\cf0  = \cf7 childGender\cf0 .toUpperCase(); \cf6 //If the input is m or f, We will again convert it to upper case for storing\cf0 \
+							\cf7 childGender\cf0  = \cf8 "A"\cf0 ;\
+						\}\
+					\}\
+					\cf6 //Now taking parent \ul ids\ulnone  for this newly created child object\cf0 \
+					\cf2 boolean\cf0  \cf7 found\cf0  = \cf2 false\cf0 ;\
+					\cf2 int\cf0  \cf7 p1\cf0  = 0, \cf7 p2\cf0  = 0;\
+					\cf6 //Taking father id\cf0 \
+					\cf2 while\cf0  (!\cf7 found\cf0 ) \{\
+						System.\cf5 out\cf0 .println(\cf8 "Enter Id of the father of the child."\cf0 );\
+						\cf7 p1\cf0  = \cf7 input\cf0 .nextInt();\
+						\cf2 boolean\cf0  \cf7 parentFound\cf0  = \cf2 false\cf0 ;\
+\
+						\cf6 //Loop to check id from existing profiles\cf0 \
+						\cf2 for\cf0  (Adult \cf7 adult\cf0  : \cf7 adultProfileList\cf0 ) \{\
+							\cf2 if\cf0  (\cf7 adult\cf0 .getId() == \cf7 p1\cf0 )\
+								\cf7 parentFound\cf0  = \cf2 true\cf0 ;\
+						\}\
+						\cf2 boolean\cf0  \cf7 isMale\cf0  = \cf2 false\cf0 ;\
+						\cf2 if\cf0  (\cf7 parentFound\cf0 ) \{\
+							\cf2 for\cf0  (Adult \cf7 adult\cf0  : \cf7 adultProfileList\cf0 ) \{\
+								\cf2 if\cf0  (\cf7 adult\cf0 .getId() == \cf7 p1\cf0 ) \{\
+									\cf6 //If id is from existing profiles, we will check if the id is of Male profile\cf0 \
+									\cf2 if\cf0  (\cf7 adult\cf0 .getGender().equals(\cf8 "M"\cf0 ))\
+										\cf7 isMale\cf0  = \cf2 true\cf0 ;\
+									\cf2 else\cf0  \{\
+										System.\cf5 out\cf0 .println(\
+												\cf8 "This is Id of the Female. Please enter id of Male."\cf0 );\
+									\}\
+								\}\
+							\}\
+							\cf2 if\cf0  (\cf7 isMale\cf0 )\
+								\cf7 found\cf0  = \cf2 true\cf0 ;\
+						\}\
+						\cf6 //If id is invalid, displaying message\cf0 \
+						\cf2 else\cf0  \{\
+							System.\cf5 out\cf0 .println(\cf8 "No profile found against this id."\cf0 );\
+						\}\
+					\}\
+\
+					\cf7 found\cf0  = \cf2 false\cf0 ;\
+\
+					\cf6 //Taking mother id\cf0 \
+					\cf2 while\cf0  (!\cf7 found\cf0 ) \{\
+						System.\cf5 out\cf0 .println(\cf8 "Enter Id of the mother of the child."\cf0 );\
+						\cf7 p2\cf0  = \cf7 input\cf0 .nextInt();\
+						\cf2 boolean\cf0  \cf7 parentFound\cf0  = \cf2 false\cf0 ;\
+\
+						\cf6 //Loop to check id from existing profiles\cf0 \
+						\cf2 for\cf0  (Adult \cf7 adult\cf0  : \cf7 adultProfileList\cf0 ) \{\
+							\cf2 if\cf0  (\cf7 adult\cf0 .getId() == \cf7 p2\cf0 )\
+								\cf7 parentFound\cf0  = \cf2 true\cf0 ;\
+						\}\
+						\cf2 boolean\cf0  \cf7 isFemale\cf0  = \cf2 false\cf0 ;\
+						\cf2 if\cf0  (\cf7 parentFound\cf0 ) \{\
+							\cf6 //If id is from existing profiles, we will check if the id is of Female profile\cf0 \
+							\cf2 for\cf0  (Adult \cf7 adult\cf0  : \cf7 adultProfileList\cf0 ) \{\
+								\cf2 if\cf0  (\cf7 adult\cf0 .getId() == \cf7 p2\cf0 ) \{\
+									\cf2 if\cf0  (\cf7 adult\cf0 .getGender().equals(\cf8 "F"\cf0 ))\
+										\cf7 isFemale\cf0  = \cf2 true\cf0 ;\
+									\cf2 else\cf0  \{\
+										System.\cf5 out\cf0 .println(\
+												\cf8 "This is Id of the Male. Please enter id of Female."\cf0 );\
+									\}\
+								\}\
+							\}\
+							\cf2 if\cf0  (\cf7 isFemale\cf0 )\
+								\cf7 found\cf0  = \cf2 true\cf0 ;\
+						\}\
+\
+						\cf6 //If id is invalid, displaying message\cf0 \
+						\cf2 else\cf0  \{\
+							System.\cf5 out\cf0 .println(\cf8 "No profile found against this id."\cf0 );\
+						\}\
+					\}\
+					\cf6 //Finally adding child to the network\cf0 \
+					Child \cf7 c\cf0  = \cf2 new\cf0  Child();\
+					\cf7 c\cf0 .setName(\cf7 name\cf0 );\
+					\cf7 c\cf0 .setAge(\cf7 childAge\cf0 );\
+					\cf7 c\cf0 .setGender(\cf7 g\cf0 );\
+					\cf7 c\cf0 .makeParent(\cf7 p1\cf0 , \cf7 p2\cf0 );\
+					\cf7 childProfileList\cf0 .add(\cf7 c\cf0 );\
+\
+					\cf6 //Adding the id of this newly created child to his/her respected parents as well\cf0 \
+					\cf2 for\cf0  (Adult \cf7 adult\cf0  : \cf7 adultProfileList\cf0 ) \{\
+						\cf2 if\cf0  (\cf7 adult\cf0 .getId() == \cf7 p1\cf0 )\
+							\cf7 adult\cf0 .makeChild(\cf7 c\cf0 .getId());\
+						\cf2 if\cf0  (\cf7 adult\cf0 .getId() == \cf7 p2\cf0 )\
+							\cf7 adult\cf0 .makeChild(\cf7 c\cf0 .getId());\
+					\}\
+\
+					System.\cf5 out\cf0 .println(\cf8 "Child has been added."\cf0 );\
+				\}\
+\
+				\cf6 //Go back\cf0 \
+				\cf2 else\cf0  \cf2 if\cf0  (\cf7 addChoice\cf0  == 3) \{\
+					\cf2 break\cf0 ;\
+				\}\
+\
+				\cf6 //invalid choice\cf0 \
+				\cf2 else\cf0  \{\
+					System.\cf5 out\cf0 .println(\cf8 "Invalid selection. Please enter a valid choice."\cf0 );\
+					\cf7 addChoice\cf0  = 1;\
+				\}\
+\
+\
+\
+			\}\
+\
+			\cf6 //2. List everyone\cf0 \
+			\cf2 else\cf0  \cf2 if\cf0  (\cf7 choice\cf0  == 2) \{\
+				\cf6 //Listing all adult profiles\cf0 \
+				System.\cf5 out\cf0 .println(\cf8 "Adult profiles\\n"\cf0 );\
+				\cf2 int\cf0  \cf7 i\cf0  = 1;\
+				\cf2 for\cf0  (Adult \cf7 adult\cf0  : \cf7 adultProfileList\cf0 ) \{\
+					System.\cf5 out\cf0 .println(\cf7 i\cf0 );\
+					\cf7 adult\cf0 .displayProfile();\
+					++\cf7 i\cf0 ;\
+				\}\
+				System.\cf5 out\cf0 .println();\
+				System.\cf5 out\cf0 .println();\
+\
+				\cf6 //Listing all child profiles\cf0 \
+				System.\cf5 out\cf0 .println(\cf8 "Child profiles\\n"\cf0 );\
+				\cf7 i\cf0  = 1;\
+				\cf2 for\cf0  (Child \cf7 childObj\cf0  : \cf7 childProfileList\cf0 ) \{\
+					System.\cf5 out\cf0 .println(\cf7 i\cf0 );\
+					\cf7 childObj\cf0 .displayProfile();\
+					++\cf7 i\cf0 ;\
+				\}\
+				System.\cf5 out\cf0 .println();\
+				System.\cf5 out\cf0 .println();\
+			\}\
+\
+			\cf6 //3. Select a person\cf0 \
+			\cf2 else\cf0  \cf2 if\cf0  (\cf7 choice\cf0  == 3) \{\
+				\cf2 int\cf0  \cf7 profileChoice\cf0  = 1;\
+				\cf2 while\cf0  (\cf7 profileChoice\cf0  >= 1 && \cf7 profileChoice\cf0  <= 3) \{\
+					\cf6 //Listing sub choices\cf0 \
+					System.\cf5 out\cf0 .println(\cf8 "1. Select from Adult profile"\cf0 );\
+					System.\cf5 out\cf0 .println(\cf8 "2. Select from Child profile"\cf0 );\
+					System.\cf5 out\cf0 .println(\cf8 "3. Go back"\cf0 );\
+					\cf7 profileChoice\cf0  = \cf7 input\cf0 .nextInt();\
+\
+					\cf6 //1. Select from Adult profile\cf0 \
+					\cf2 if\cf0  (\cf7 profileChoice\cf0  == 1) \{\
+						System.\cf5 out\cf0 .println(\cf8 "Enter partial or full name of the person"\cf0 );\
+						\cf7 input\cf0 .nextLine();\
+						String \cf7 name\cf0  = \cf7 input\cf0 .nextLine();\
+						\cf2 for\cf0  (\cf2 int\cf0  \cf7 i\cf0  = 0; \cf7 i\cf0  < \cf7 adultProfileList\cf0 .size(); ++\cf7 i\cf0 ) \{\
+							\cf2 if\cf0  (\cf7 adultProfileList\cf0 .get(\cf7 i\cf0 ).getName().contains(\cf7 name\cf0 )) \cf6 //contains method is used, so can it work for both partial or full name \cf0 \
+							\{\
+\
+								\cf2 int\cf0  \cf7 adultChoice\cf0  = 1;\
+								\cf2 while\cf0  (\cf7 adultChoice\cf0  >= 1 && \cf7 adultChoice\cf0  <= 5) \{\
+									\cf6 //Displaying the \ul submenu\ulnone  if the profile is found\cf0 \
+									System.\cf5 out\cf0 .println(\cf8 "1. Display the profile."\cf0 );\
+									System.\cf5 out\cf0 .println(\cf8 "2. Update the profile."\cf0 );\
+									System.\cf5 out\cf0 .println(\cf8 "3. Delete the person."\cf0 );\
+									System.\cf5 out\cf0 .println(\cf8 "4. Make this person friend of another person"\cf0 );\
+									System.\cf5 out\cf0 .println(\
+											\cf8 "5. Find out whether a person is a direct friend of another person."\cf0 );\
+									System.\cf5 out\cf0 .println(\cf8 "6. Find out person's friend(s)."\cf0 );\
+									System.\cf5 out\cf0 .println(\cf8 "7. Find out person's child(ren)."\cf0 );\
+									System.\cf5 out\cf0 .println(\cf8 "8. Go back"\cf0 );\
+\
+									\cf7 adultChoice\cf0  = \cf7 input\cf0 .nextInt();\
+\
+									\cf6 //1. Display the profile\cf0 \
+									\cf2 if\cf0  (\cf7 adultChoice\cf0  == 1) \{\
+										\cf7 adultProfileList\cf0 .get(\cf7 i\cf0 ).displayProfile();\
+									\}\
+\
+									\cf6 //2. Update the profile\cf0 \
+									\cf2 else\cf0  \cf2 if\cf0  (\cf7 adultChoice\cf0  == 2) \{ \cf6 //change name\cf0 \
+										System.\cf5 out\cf0 .print(\cf8 "Enter new name: "\cf0 );\
+										\cf7 input\cf0 .nextLine();\
+										\cf6 //change age\cf0 \
+										String \cf7 newName\cf0  = \cf7 input\cf0 .nextLine();\
+										System.\cf5 out\cf0 .print(\cf8 "Enter new age: "\cf0 );\
+										\cf2 int\cf0  \cf7 newAge\cf0  = \cf7 input\cf0 .nextInt();\
+										\cf6 //change status\cf0 \
+										System.\cf5 out\cf0 .print(\cf8 "Enter new status: "\cf0 );\
+										\cf7 input\cf0 .nextLine();\
+										String \cf7 newStatus\cf0  = \cf7 input\cf0 .nextLine();\
+										\cf7 adultProfileList\cf0 .get(\cf7 i\cf0 ).updateProfile(\cf7 newName\cf0 , \cf7 newAge\cf0 , \cf7 newStatus\cf0 );\
+										System.\cf5 out\cf0 .println(\cf8 "Profile has been updated"\cf0 );\
+										System.\cf5 out\cf0 .println();\
+									\}\
+\
+									\cf6 //3. Delete the person\cf0 \
+									\cf2 else\cf0  \cf2 if\cf0  (\cf7 adultChoice\cf0  == 3) \{\
+										\cf7 adultProfileList\cf0 .remove(\cf7 adultProfileList\cf0 .get(\cf7 i\cf0 ));\
+										System.\cf5 out\cf0 .println(\cf8 "The person has been deleted."\cf0 );\
+										\cf2 break\cf0 ;\
+									\}\
+\
+									\cf6 //4. Make this person friend of another person\cf0 \
+									\cf2 else\cf0  \cf2 if\cf0  (\cf7 adultChoice\cf0  == 4) \{\
+										System.\cf5 out\cf0 .println(\cf8 "Enter the Profile ID of the person: "\cf0 );\
+										\cf2 int\cf0  \cf7 id\cf0  = \cf7 input\cf0 .nextInt();\
+										\cf2 boolean\cf0  \cf7 isAlreadyFriend\cf0  = \cf2 false\cf0 ;\
+\
+										\cf6 //Checking if the person is already friend of this id\cf0 \
+										\cf2 for\cf0  (\cf2 int\cf0  \cf7 friendId\cf0  : \cf7 adultProfileList\cf0 .get(\cf7 i\cf0 ).getFriendList()) \{\
+											\cf2 if\cf0  (\cf7 id\cf0  == \cf7 friendId\cf0 )\
+												\cf7 isAlreadyFriend\cf0  = \cf2 true\cf0 ;\
+										\}\
+										\cf2 if\cf0  (\cf7 isAlreadyFriend\cf0 )\
+											System.\cf5 out\cf0 .println(\
+													\cf8 "These two persons are already friends of each other."\cf0 );\
+\
+										\cf6 //If the person is not already friend of this id, we will then add this id to his/her friend list\cf0 \
+										\cf2 else\cf0  \{\
+											\cf7 adultProfileList\cf0 .get(\cf7 i\cf0 ).makeFriend(\cf7 id\cf0 );\
+\
+											\cf6 //Adding this person's id to his/her friend's list of friends\cf0 \
+											\cf2 for\cf0  (Adult \cf7 adult\cf0  : \cf7 adultProfileList\cf0 ) \{\
+												\cf2 if\cf0  (\cf7 adult\cf0 .getId() == \cf7 id\cf0 )\
+													\cf7 adult\cf0 .makeFriend(\cf7 adultProfileList\cf0 .get(\cf7 i\cf0 ).getId());\
+											\}\
+											System.\cf5 out\cf0 .println(\cf8 "Added as a friend."\cf0 );\
+										\}\
+									\}\
+\
+									\cf6 //5. Find out whether a person is a direct friend of another person.\cf0 \
+									\cf2 else\cf0  \cf2 if\cf0  (\cf7 adultChoice\cf0  == 5) \{\
+										System.\cf5 out\cf0 .println(\cf8 "Enter the Profile ID of the person: "\cf0 );\
+										\cf2 int\cf0  \cf7 id\cf0  = \cf7 input\cf0 .nextInt();\
+										\cf2 boolean\cf0  \cf7 isFriend\cf0  = \cf2 false\cf0 ;\
+\
+										\cf6 //Checking for friendship\cf0 \
+										\cf2 for\cf0  (\cf2 int\cf0  \cf7 friendId\cf0  : \cf7 adultProfileList\cf0 .get(\cf7 i\cf0 ).getFriendList()) \{\
+											\cf2 if\cf0  (\cf7 id\cf0  == \cf7 friendId\cf0 ) \cf6 //If id is found, setting isFriend to true\cf0 \
+												\cf7 isFriend\cf0  = \cf2 true\cf0 ;\
+										\}\
+										\cf2 if\cf0  (\cf7 isFriend\cf0 )\
+											System.\cf5 out\cf0 .println(\
+													\cf8 "Yes, these two persons are friends of each other."\cf0 );\
+										\cf2 else\cf0  \{\
+											System.\cf5 out\cf0 .println(\
+													\cf8 "No, these two persons are not friends of each other."\cf0 );\
+										\}\
+									\}\
+\
+									\cf6 //6. Find out person's friend(s).\cf0 \
+									\cf2 else\cf0  \cf2 if\cf0  (\cf7 adultChoice\cf0  == 6) \{\
+\
+										System.\cf5 out\cf0 .println(\cf8 "hhhh1"\cf0 );\
+										\cf2 int\cf0  \cf7 n\cf0  = 0;\
+										\cf2 for\cf0  (\cf2 int\cf0  \cf7 friendId\cf0  : \cf7 adultProfileList\cf0 .get(\cf7 i\cf0 ).getFriendList()) \{\
+\
+											System.\cf5 out\cf0 .println(\cf8 "hhhh1"\cf0 );\
+											\cf6 //Looping through array of profiles to display the friends\cf0 \
+											\cf2 for\cf0  (Adult \cf7 adult\cf0  : \cf7 adultProfileList\cf0 ) \{\
+\
+												System.\cf5 out\cf0 .println(\cf8 "xxx"\cf0 );\
+												\cf2 if\cf0  (\cf7 adult\cf0 .getId() == \cf7 friendId\cf0 ) \{\
+													System.\cf5 out\cf0 .println(\cf7 n\cf0 );\
+													\cf7 adult\cf0 .displayProfile();\
+													++\cf7 n\cf0 ;\
+													System.\cf5 out\cf0 .println(\cf8 "cccc"\cf0 );\
+												\} \cf2 else\cf0 \
+													System.\cf5 out\cf0 .println(\cf8 "ther is no friend for this person"\cf0 );\
+											\}\
+										\}\
+									\}\
+\
+									\cf6 //7. Find out person's child(\ul ren\ulnone ).\cf0 \
+									\cf2 else\cf0  \cf2 if\cf0  (\cf7 adultChoice\cf0  == 7) \{\
+										\cf2 int\cf0  \cf7 n\cf0  = 1;\
+										\cf2 for\cf0  (\cf2 int\cf0  \cf7 childId\cf0  : \cf7 adultProfileList\cf0 .get(\cf7 i\cf0 ).getChildList()) \{\
+											\cf6 //Looping through array of profiles to display the \ul childrens\cf0 \ulnone \
+											\cf2 for\cf0  (Child \cf7 c\cf0  : \cf7 childProfileList\cf0 ) \{\
+												\cf2 if\cf0  (\cf7 c\cf0 .getId() == \cf7 childId\cf0 ) \{\
+													System.\cf5 out\cf0 .println(\cf7 n\cf0 );\
+													\cf7 c\cf0 .displayProfile();\
+													++\cf7 n\cf0 ;\
+												\}\
+											\}\
+										\}\
+									\}\
+\
+									\cf6 //8. Go back\cf0 \
+									\cf2 else\cf0  \cf2 if\cf0  (\cf7 adultChoice\cf0  == 8) \{\
+										\cf2 break\cf0 ;\
+									\}\
+\
+									\cf6 //Invalid selection\cf0 \
+									\cf2 else\cf0  \{\
+										System.\cf5 out\cf0 .println(\cf8 "Invalid selection. Please enter a valid choice."\cf0 );\
+										\cf7 adultChoice\cf0  = 1;\
+									\}\
+								\}\
+								\cf2 break\cf0 ;\
+							\}\
+						\}\
+					\}\
+\
+					\cf6 //1. Select from Child profile\cf0 \
+					\cf2 else\cf0  \cf2 if\cf0  (\cf7 profileChoice\cf0  == 2) \{\
+						System.\cf5 out\cf0 .println(\cf8 "Enter partial or full name of the child"\cf0 );\
+						\cf7 input\cf0 .nextLine();\
+						String \cf7 name\cf0  = \cf7 input\cf0 .nextLine();\
+						\cf2 for\cf0  (\cf2 int\cf0  \cf7 i\cf0  = 0; \cf7 i\cf0  < \cf7 childProfileList\cf0 .size(); ++\cf7 i\cf0 ) \{\
+							\cf2 if\cf0  (\cf7 childProfileList\cf0 .get(\cf7 i\cf0 ).getName().contains(\cf7 name\cf0 )) \cf6 //contains method is used so can it work for both partial or full name \cf0 \
+							\{\
+\
+								\cf2 int\cf0  \cf7 childChoice\cf0  = 1;\
+								\cf2 while\cf0  (\cf7 childChoice\cf0  >= 1 && \cf7 childChoice\cf0  <= 5) \{\
+									\cf6 //Displaying the \ul submenu\ulnone  if the profile is found\cf0 \
+									System.\cf5 out\cf0 .println(\cf8 "1. Display the profile."\cf0 );\
+									System.\cf5 out\cf0 .println(\cf8 "2. Update the profile."\cf0 );\
+									System.\cf5 out\cf0 .println(\cf8 "3. Delete the person."\cf0 );\
+									System.\cf5 out\cf0 .println(\cf8 "4. Make this child friend of another child"\cf0 );\
+									System.\cf5 out\cf0 .println(\
+											\cf8 "5. Find out whether a child is a direct friend of another child."\cf0 );\
+									System.\cf5 out\cf0 .println(\cf8 "6. Find out child's friend(s)."\cf0 );\
+									System.\cf5 out\cf0 .println(\cf8 "7. Find out child's parents."\cf0 );\
+									System.\cf5 out\cf0 .println(\cf8 "8. Go back"\cf0 );\
+\
+									\cf7 childChoice\cf0  = \cf7 input\cf0 .nextInt();\
+\
+									\cf6 //1. Display the profile.\cf0 \
+									\cf2 if\cf0  (\cf7 childChoice\cf0  == 1) \{\
+										\cf7 childProfileList\cf0 .get(\cf7 i\cf0 ).displayProfile();\
+									\}\
+\
+									\cf6 //2. Update the profile.\cf0 \
+									\cf2 else\cf0  \cf2 if\cf0  (\cf7 childChoice\cf0  == 2) \{\
+										System.\cf5 out\cf0 .print(\cf8 "Enter new name: "\cf0 );\
+										\cf7 input\cf0 .nextLine();\
+										String \cf7 newName\cf0  = \cf7 input\cf0 .nextLine();\
+										System.\cf5 out\cf0 .print(\cf8 "Enter new age: "\cf0 );\
+										\cf2 int\cf0  \cf7 newAge\cf0  = \cf7 input\cf0 .nextInt();\
+										System.\cf5 out\cf0 .print(\cf8 "Enter new status: "\cf0 );\
+										\cf7 input\cf0 .nextLine();\
+										String \cf7 newStatus\cf0  = \cf7 input\cf0 .nextLine();\
+										\cf7 childProfileList\cf0 .get(\cf7 i\cf0 ).updateProfile(\cf7 newName\cf0 , \cf7 newAge\cf0 , \cf7 newStatus\cf0 );\
+										System.\cf5 out\cf0 .println(\cf8 "Profile has been updated"\cf0 );\
+										System.\cf5 out\cf0 .println();\
+									\}\
+\
+									\cf6 //3. Delete the person.\cf0 \
+									\cf2 else\cf0  \cf2 if\cf0  (\cf7 childChoice\cf0  == 3) \{\
+										\cf7 childProfileList\cf0 .remove(\cf7 childProfileList\cf0 .get(\cf7 i\cf0 ));\
+										System.\cf5 out\cf0 .println(\cf8 "The child has been deleted."\cf0 );\
+										\cf2 break\cf0 ;\
+									\}\
+\
+									\cf6 //4. Make this child friend of another child\cf0 \
+									\cf2 else\cf0  \cf2 if\cf0  (\cf7 childChoice\cf0  == 4) \{\
+										System.\cf5 out\cf0 .println(\cf8 "Enter the Profile ID of the child: "\cf0 );\
+										\cf2 int\cf0  \cf7 id\cf0  = \cf7 input\cf0 .nextInt();\
+										\cf2 boolean\cf0  \cf7 isAlreadyFriend\cf0  = \cf2 false\cf0 ;\
+\
+										\cf6 //Checking if the person is already friend of this id\cf0 \
+										\cf2 for\cf0  (\cf2 int\cf0  \cf7 friendId\cf0  : \cf7 childProfileList\cf0 .get(\cf7 i\cf0 ).getFriendList()) \{\
+											\cf2 if\cf0  (\cf7 id\cf0  == \cf7 friendId\cf0 )\
+												\cf7 isAlreadyFriend\cf0  = \cf2 true\cf0 ;\
+										\}\
+										\cf2 if\cf0  (\cf7 isAlreadyFriend\cf0 )\
+											System.\cf5 out\cf0 .println(\
+													\cf8 "These two children are already friends of each other."\cf0 );\
+\
+										\cf6 //If the person is not already friend of this id, we will then add this id to his/her friend list\cf0 \
+										\cf6 //But first we will make sure that the age difference is 3 or less, and the age is greater than 2\cf0 \
+										\cf2 else\cf0  \{\
+											\cf2 boolean\cf0  \cf7 \ul \ulc7 flag\cf0 \ulnone  = \cf2 false\cf0 ;\
+											\cf2 for\cf0  (Child \cf7 c\cf0  : \cf7 childProfileList\cf0 ) \{\
+												\cf2 if\cf0  (\cf7 c\cf0 .getId() == \cf7 id\cf0 ) \{\
+													\cf2 if\cf0  (\cf7 c\cf0 .getAge() > 2\
+															&& \cf7 childProfileList\cf0 .get(\cf7 i\cf0 ).getAge() > 2) \{\
+														\cf6 //Getting the difference for both profiles\cf0 \
+														\cf2 int\cf0  \cf7 difference\cf0  = \cf7 childProfileList\cf0 .get(\cf7 i\cf0 ).getAge()\
+																- \cf7 c\cf0 .getAge();\
+\
+														\cf6 //If the difference is in negative, we will convert it to \ul pisitive\cf0 \ulnone \
+														\cf2 if\cf0  (\cf7 difference\cf0  < 0)\
+															\cf7 difference\cf0  = -\cf7 difference\cf0 ;\
+\
+														\cf6 //Now checking for the difference\cf0 \
+														\cf6 //If difference is 3 or less\cf0 \
+														\cf2 if\cf0  (\cf7 difference\cf0  <= 3) \{\
+															\cf7 childProfileList\cf0 .get(\cf7 i\cf0 ).makeFriend(\cf7 id\cf0 );\
+\
+															\cf6 //Adding the id of the selected profile to profile of Id entered\cf0 \
+															\cf2 for\cf0  (Child \cf7 cc\cf0  : \cf7 childProfileList\cf0 ) \{\
+																\cf2 if\cf0  (\cf7 cc\cf0 .getId() == \cf7 id\cf0 )\
+																	\cf7 cc\cf0 .makeFriend(\
+																			\cf7 childProfileList\cf0 .get(\cf7 i\cf0 ).getId());\
+															\}\
+															System.\cf5 out\cf0 .println(\cf8 "Added as a friend."\cf0 );\
+														\} \cf2 else\cf0 \
+															System.\cf5 out\cf0 .println(\
+																	\cf8 "The age difference between these two childs is more than 3 years, so they cannot make friends of each other."\cf0 );\
+													\} \cf2 else\cf0 \
+														System.\cf5 out\cf0 .println(\
+																\cf8 "One of these two childs are 2 years or below, so they cannot make friends of each other."\cf0 );\
+												\}\
+											\}\
+\
+										\}\
+									\}\
+\
+									\cf6 //5. Find out whether a child is a direct friend of another child.\cf0 \
+									\cf2 else\cf0  \cf2 if\cf0  (\cf7 childChoice\cf0  == 5) \{\
+										System.\cf5 out\cf0 .println(\cf8 "Enter the Profile ID of the child: "\cf0 );\
+										\cf2 int\cf0  \cf7 id\cf0  = \cf7 input\cf0 .nextInt();\
+										\cf2 boolean\cf0  \cf7 isFriend\cf0  = \cf2 false\cf0 ;\
+\
+										\cf6 //Checking for friendship\cf0 \
+										\cf2 for\cf0  (\cf2 int\cf0  \cf7 friendId\cf0  : \cf7 childProfileList\cf0 .get(\cf7 i\cf0 ).getFriendList()) \{\
+											\cf6 //If id is found, setting isFriend to true\cf0 \
+											\cf2 if\cf0  (\cf7 id\cf0  == \cf7 friendId\cf0 )\
+												\cf7 isFriend\cf0  = \cf2 true\cf0 ;\
+										\}\
+										\cf2 if\cf0  (\cf7 isFriend\cf0 )\
+											System.\cf5 out\cf0 .println(\
+													\cf8 "Yes, these two childrens are friends of each other."\cf0 );\
+										\cf2 else\cf0  \{\
+											System.\cf5 out\cf0 .println(\
+													\cf8 "No, these two childrens are not friends of each other."\cf0 );\
+										\}\
+									\}\
+\
+									\cf6 //6. Find out child's friend(s).\cf0 \
+									\cf2 else\cf0  \cf2 if\cf0  (\cf7 childChoice\cf0  == 6) \{\
+										\cf2 int\cf0  \cf7 n\cf0  = 1;\
+										\cf2 for\cf0  (\cf2 int\cf0  \cf7 friendId\cf0  : \cf7 childProfileList\cf0 .get(\cf7 i\cf0 ).getFriendList()) \{\
+											System.\cf5 out\cf0 .println(\cf7 friendId\cf0 );\
+											\cf6 //Looping through array of profiles to display the friends\cf0 \
+											\cf2 for\cf0  (Child \cf7 c\cf0  : \cf7 childProfileList\cf0 ) \{\
+												\cf2 if\cf0  (\cf7 c\cf0 .getId() == \cf7 friendId\cf0 ) \{\
+													System.\cf5 out\cf0 .println(\cf7 n\cf0 );\
+													\cf7 c\cf0 .displayProfile();\
+													++\cf7 n\cf0 ;\
+												\}\
+											\}\
+										\}\
+									\}\
+\
+									\cf6 //7. Find out child's parents.\cf0 \
+									\cf2 else\cf0  \cf2 if\cf0  (\cf7 childChoice\cf0  == 7) \{\
+										\cf2 int\cf0  \cf7 n\cf0  = 1;\
+										\cf2 for\cf0  (\cf2 int\cf0  \cf7 parentId\cf0  : \cf7 childProfileList\cf0 .get(\cf7 i\cf0 ).getParentList()) \{\
+											\cf6 //Looping through array of profiles to display the parents\cf0 \
+											\cf2 for\cf0  (Adult \cf7 adult\cf0  : \cf7 adultProfileList\cf0 ) \{\
+												\cf2 if\cf0  (\cf7 adult\cf0 .getId() == \cf7 parentId\cf0 ) \{\
+													System.\cf5 out\cf0 .println(\cf7 n\cf0 );\
+													\cf7 adult\cf0 .displayProfile();\
+													++\cf7 n\cf0 ;\
+												\}\
+											\}\
+										\}\
+									\}\
+\
+									\cf6 //8. Go back\cf0 \
+									\cf2 else\cf0  \cf2 if\cf0  (\cf7 childChoice\cf0  == 8) \{\
+										\cf2 break\cf0 ;\
+									\}\
+\
+									\cf6 //Invalid choice\cf0 \
+									\cf2 else\cf0  \{\
+										System.\cf5 out\cf0 .println(\cf8 "Invalid selection. Please enter a valid choice."\cf0 );\
+										\cf7 childChoice\cf0  = 1;\
+									\}\
+								\}\
+								\cf2 break\cf0 ;\
+							\}\
+						\}\
+					\}\
+\
+					\cf6 //Go back\cf0 \
+					\cf2 else\cf0  \cf2 if\cf0  (\cf7 profileChoice\cf0  == 3) \{\
+						\cf2 break\cf0 ;\
+					\}\
+\
+					\cf6 //invalid choice\cf0 \
+					\cf2 else\cf0  \{\
+						System.\cf5 out\cf0 .println(\cf8 "Invalid selection. Please enter a valid choice."\cf0 );\
+						\cf7 profileChoice\cf0  = 1;\
+					\}\
+				\}\
+\
+			\}\
+\
+			\cf6 //Invalid choice\cf0 \
+			\cf2 else\cf0  \cf2 if\cf0 (\cf7 choice\cf0 ==4)\{\
+				System.\cf5 out\cf0 .println(\cf8 " Good Bye."\cf0 );\
+			\}\
+			\cf2 else\cf0  \{\
+				System.\cf5 out\cf0 .println(\cf8 "Invalid selection. Please enter a valid choice."\cf0 );\
+				\cf7 choice\cf0  = 1;\
+			\}\
+\
+		\} \cf2 while\cf0 (\cf7 choice\cf0 !=4);\
+\
+\
+	\}\
+\}\
+}
